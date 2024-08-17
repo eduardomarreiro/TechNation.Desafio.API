@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,13 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TechNation.Desafio.Domain\TechNation.Desafio.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Mappings\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
