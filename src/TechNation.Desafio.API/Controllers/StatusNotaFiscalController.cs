@@ -42,25 +42,23 @@ namespace TechNation.Desafio.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _statusNotaFiscalApplicationService.Add(StatusNotaFiscalDto);
-            return CreatedAtAction(nameof(GetById), new { id = StatusNotaFiscalDto.Id }, StatusNotaFiscalDto);
+            var statusNF = await _statusNotaFiscalApplicationService.Add(StatusNotaFiscalDto);
+            return CreatedAtAction(nameof(GetById), new { id = statusNF.Id }, statusNF);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody][FromRoute] StatusNotaFiscalDto StatusNotaFiscalDto)
+        [HttpPut]
+        public async Task<ActionResult> Update([FromBody] StatusNotaFiscalDto StatusNotaFiscalDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var statusNF = await _statusNotaFiscalApplicationService.GetById(id);
+            var statusNF = await _statusNotaFiscalApplicationService.GetById(StatusNotaFiscalDto.Id);
             if (statusNF is null)
             {
                 return NotFound();
             }
-
-            StatusNotaFiscalDto.Id = id;
 
             await _statusNotaFiscalApplicationService.Update(StatusNotaFiscalDto);
             return NoContent();
