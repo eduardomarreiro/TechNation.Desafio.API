@@ -1,0 +1,20 @@
+services:
+  technation-api:
+    container_name: technation-api
+    depends_on:
+      - sqlserver
+    build: ./src
+    ports:
+      - 8080:80
+      - 8081:443
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+
+  sqlserver:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1434:1433
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: technation@123
