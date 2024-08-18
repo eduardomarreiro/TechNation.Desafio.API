@@ -65,6 +65,8 @@ context.Database.Migrate();
 
 #endregion
 
+app.UseCors("AllowAngularApp");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
