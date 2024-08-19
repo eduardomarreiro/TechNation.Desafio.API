@@ -19,9 +19,19 @@ namespace TechNation.Desafio.Domain.Services
         {
             _notaFiscalRepository = notaFiscalRepository;
         }
-        public async Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(CardsNotaFiscalFilter model)
+        public async Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(DashboardNotaFiscalFilter model)
         {
             return await _notaFiscalRepository.GetQtdNotasPorCategoria(model);
+        }
+
+        public async Task<ChartResponse> GetInadimplenciaMensal(DashboardNotaFiscalFilter model)
+        {
+            return await _notaFiscalRepository.GetInadimplenciaMensal(model);
+        }
+
+        public async Task<ChartResponse> GetReceitaMensal(DashboardNotaFiscalFilter model)
+        {
+            return await _notaFiscalRepository.GetReceitaMensal(model);
         }
     }
 }

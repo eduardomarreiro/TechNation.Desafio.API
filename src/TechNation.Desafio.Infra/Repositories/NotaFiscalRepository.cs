@@ -14,13 +14,13 @@ namespace TechNation.Desafio.Infra.Repositories
         {
         }
 
-        public async Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(CardsNotaFiscalFilter model)
+        public async Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(DashboardNotaFiscalFilter model)
         {
 
             var query = _sqlContext.Set<NotaFiscal>().AsNoTracking().AsQueryable();
 
             query = ApplyDateFilters(query, model);
-            
+
 
             var notas = await query.ToListAsync();
 
@@ -43,7 +43,62 @@ namespace TechNation.Desafio.Infra.Repositories
 
         }
 
-        private IQueryable<NotaFiscal> ApplyDateFilters(IQueryable<NotaFiscal> query, CardsNotaFiscalFilter model)
+        public async Task<ChartResponse> GetInadimplenciaMensal(DashboardNotaFiscalFilter model)
+        {
+            var query = _sqlContext.Set<NotaFiscal>().AsNoTracking()
+                                                    .Where(_ => _.IdStatusNotaFiscal == (int)EStatusNotaFiscal.PagamentoEmAtraso)
+                                                    .AsQueryable();
+
+            query = ApplyDateFilters(query, model);
+
+            var result = await query.ToListAsync();
+
+            var chartResponseResult = new ChartResponse
+            {
+                Labels = result.GroupBy(nf => new { nf.DataVencimento.Year, nf.DataVencimento.Month })
+                               .OrderBy(g => g.Key.Year).ThenBy(g => g.Key.Month)
+                               .Select(g => new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMMM/yyyy"))
+                               .ToList(),
+
+                Data = result.GroupBy(nf => new { nf.DataVencimento.Year, nf.DataVencimento.Month })
+                             .OrderBy(g => g.Key.Year).ThenBy(g => g.Key.Month)
+                             .Select(g => g.Sum(z => z.Valor))
+                             .ToList()
+            };
+
+            return chartResponseResult;
+
+        }
+
+        public async Task<ChartResponse> GetReceitaMensal(DashboardNotaFiscalFilter model)
+        {
+            var query = _sqlContext.Set<NotaFiscal>().AsNoTracking()
+                                                   .Where(_ => _.IdStatusNotaFiscal == (int)EStatusNotaFiscal.PagamentoRealizado)
+                                                   .AsQueryable();
+
+            query = ApplyDateFilters(query, model);
+
+            var result = query.ToList();
+
+            var chartResponseResult = new ChartResponse
+            {
+                Labels = result.GroupBy(nf => new { nf.DataPagamento?.Year, nf.DataPagamento?.Month })
+                               .OrderBy(g => g.Key.Year).ThenBy(g => g.Key.Month)
+                               .Select(g => new DateTime((int)g.Key.Year, (int)g.Key.Month, 1).ToString("MMMM/yyyy"))
+                               .ToList(),
+
+                Data = result.GroupBy(nf => new { nf.DataPagamento?.Year, nf.DataPagamento?.Month })
+                             .OrderBy(g => g.Key.Year).ThenBy(g => g.Key.Month)
+                             .Select(g => g.Sum(z => z.Valor))
+                             .ToList()
+            };
+
+
+
+            return chartResponseResult;
+        }
+
+        private IQueryable<NotaFiscal> ApplyDateFilters(IQueryable<NotaFiscal> query, DashboardNotaFiscalFilter model)
         {
             if (model.DataEmissaoDe is not null)
                 query = query.Where(n => n.DataEmissao >= model.DataEmissaoDe);

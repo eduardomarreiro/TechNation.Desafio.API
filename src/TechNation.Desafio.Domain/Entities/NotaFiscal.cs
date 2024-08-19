@@ -11,6 +11,7 @@ namespace TechNation.Desafio.Domain.Entities
         public string NomePagador { get; set; }
         public string NumeroIdentificacao { get; set; }
         public DateTime DataEmissao { get; set; }
+        public DateTime DataVencimento { get; set; }
         public DateTime? DataCobranca { get; set; }
         public DateTime? DataPagamento { get; set; }
         public decimal Valor { get; set; }

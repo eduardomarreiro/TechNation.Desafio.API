@@ -25,9 +25,25 @@ namespace TechNation.Desafio.API.Controllers
         }
         [HttpGet]
         [Route("GetQtdNotasPorCategoria")]
-        public async Task<ActionResult<List<CardNotaFiscalResponse>>> GetQtdNotasPorCategoria([FromQuery] CardsNotaFiscalDto dto)
+        public async Task<ActionResult<List<CardNotaFiscalResponse>>> GetQtdNotasPorCategoria([FromQuery] DashboardNotaFiscalDto dto)
         {
             var notasFiscais = await _notaFiscalApplicationService.GetQtdNotasPorCategoria(dto);
+            return Ok(notasFiscais);
+        }
+
+        [HttpGet]
+        [Route("GetInadimplenciaMensal")]
+        public async Task<ActionResult<ChartResponse>> GetInadimplenciaMensal([FromQuery] DashboardNotaFiscalDto dto)
+        {
+            var notasFiscais = await _notaFiscalApplicationService.GetInadimplenciaMensal(dto);
+            return Ok(notasFiscais);
+        }
+
+        [HttpGet]
+        [Route("GetReceitaMensal")]
+        public async Task<ActionResult<ChartResponse>> GetReceitaMensal([FromQuery] DashboardNotaFiscalDto dto)
+        {
+            var notasFiscais = await _notaFiscalApplicationService.GetReceitaMensal(dto);
             return Ok(notasFiscais);
         }
 

@@ -11,6 +11,10 @@ namespace TechNation.Desafio.Domain.Interfaces.Repositories
 {
     public interface INotaFiscalRepository : IRepositoryBase<NotaFiscal>
     {
-        Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(CardsNotaFiscalFilter model);
+        Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(DashboardNotaFiscalFilter model);
+        Task<ChartResponse> GetInadimplenciaMensal(DashboardNotaFiscalFilter model);
+        Task<ChartResponse> GetReceitaMensal(DashboardNotaFiscalFilter model);
+
+
     }
 }

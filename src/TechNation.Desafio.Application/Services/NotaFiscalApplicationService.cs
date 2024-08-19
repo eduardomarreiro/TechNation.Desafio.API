@@ -24,14 +24,29 @@ namespace TechNation.Desafio.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(CardsNotaFiscalDto cardsNotaFiscalDto)
+        public async Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(DashboardNotaFiscalDto cardsNotaFiscalDto)
         {
-            var cardsNotaFiscalFilter = _mapper.Map<CardsNotaFiscalFilter>(cardsNotaFiscalDto);
+            var cardsNotaFiscalFilter = _mapper.Map<DashboardNotaFiscalFilter>(cardsNotaFiscalDto);
             var cardNotaFiscalResponses = await _notaFiscalRepository.GetQtdNotasPorCategoria(cardsNotaFiscalFilter);
             
             return _mapper.Map<List<CardNotaFiscalResponse>>(cardNotaFiscalResponses);
         }
 
+        public async Task<ChartResponse> GetInadimplenciaMensal(DashboardNotaFiscalDto dashboardNotaFiscalDto)
+        {
+            var dashboardNotaFiscalFilter = _mapper.Map<DashboardNotaFiscalFilter>(dashboardNotaFiscalDto);
+            var chartResponse = await _notaFiscalRepository.GetInadimplenciaMensal(dashboardNotaFiscalFilter);
+
+            return _mapper.Map<ChartResponse>(chartResponse);
+        }
+
+        public async Task<ChartResponse> GetReceitaMensal(DashboardNotaFiscalDto dashboardNotaFiscalDto)
+        {
+            var dashboardNotaFiscalFilter = _mapper.Map<DashboardNotaFiscalFilter>(dashboardNotaFiscalDto);
+            var cardNotaFiscalResponses = await _notaFiscalRepository.GetReceitaMensal(dashboardNotaFiscalFilter);
+
+            return _mapper.Map<ChartResponse>(cardNotaFiscalResponses);
+        }
 
     }
 
