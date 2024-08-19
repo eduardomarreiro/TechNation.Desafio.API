@@ -43,9 +43,17 @@ namespace TechNation.Desafio.Application.Services
         public async Task<ChartResponse> GetReceitaMensal(DashboardNotaFiscalDto dashboardNotaFiscalDto)
         {
             var dashboardNotaFiscalFilter = _mapper.Map<DashboardNotaFiscalFilter>(dashboardNotaFiscalDto);
-            var cardNotaFiscalResponses = await _notaFiscalRepository.GetReceitaMensal(dashboardNotaFiscalFilter);
+            var chartResponse = await _notaFiscalRepository.GetReceitaMensal(dashboardNotaFiscalFilter);
 
-            return _mapper.Map<ChartResponse>(cardNotaFiscalResponses);
+            return _mapper.Map<ChartResponse>(chartResponse);
+        }
+
+        public async Task<List<NotaFiscal>> GetInfoTableDashboard(DashboardNotaFiscalDto dashboardNotaFiscalDto)
+        {
+            var dashboardNotaFiscalFilter = _mapper.Map<DashboardNotaFiscalFilter>(dashboardNotaFiscalDto);
+            var tableResponse = await _notaFiscalRepository.GetInfoTableDashboard(dashboardNotaFiscalFilter);
+
+            return _mapper.Map<List<NotaFiscal>>(tableResponse);
         }
 
     }

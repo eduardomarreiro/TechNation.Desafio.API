@@ -14,5 +14,6 @@ namespace TechNation.Desafio.Domain.Interfaces.Services
         Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(DashboardNotaFiscalFilter model);
         Task<ChartResponse> GetInadimplenciaMensal(DashboardNotaFiscalFilter model);
         Task<ChartResponse> GetReceitaMensal(DashboardNotaFiscalFilter model);
+        Task<List<NotaFiscal>> GetInfoTableDashboard(DashboardNotaFiscalFilter model);
     }
 }

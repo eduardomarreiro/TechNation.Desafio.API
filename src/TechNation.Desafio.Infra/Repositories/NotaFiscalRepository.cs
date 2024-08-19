@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TechNation.Desafio.Application.DTOs;
 using TechNation.Desafio.Domain.Entities;
 using TechNation.Desafio.Domain.Enums;
 using TechNation.Desafio.Domain.Filters;
@@ -78,7 +79,7 @@ namespace TechNation.Desafio.Infra.Repositories
 
             query = ApplyDateFilters(query, model);
 
-            var result = query.ToList();
+            var result = await query.ToListAsync();
 
             var chartResponseResult = new ChartResponse
             {
@@ -96,6 +97,17 @@ namespace TechNation.Desafio.Infra.Repositories
 
 
             return chartResponseResult;
+        }
+
+        public async Task<List<NotaFiscal>> GetInfoTableDashboard(DashboardNotaFiscalFilter model)
+        {
+            var query = _sqlContext.Set<NotaFiscal>().AsNoTracking().Include(q => q.StatusNotaFiscal).AsQueryable();
+
+            query = ApplyDateFilters(query, model);
+            query = ApplyStatusFilters(query, model);
+            var result = await query.ToListAsync();
+
+            return result;
         }
 
         private IQueryable<NotaFiscal> ApplyDateFilters(IQueryable<NotaFiscal> query, DashboardNotaFiscalFilter model)
@@ -117,6 +129,13 @@ namespace TechNation.Desafio.Infra.Repositories
 
             if (model.DataPagamentoAte is not null)
                 query = query.Where(n => n.DataPagamento <= model.DataPagamentoAte);
+
+            return query;
+        }
+        private IQueryable<NotaFiscal> ApplyStatusFilters(IQueryable<NotaFiscal> query, DashboardNotaFiscalFilter model)
+        {
+            if (model.IdStatusNotaFiscal is not null)
+                query = query.Where(q =>  q.IdStatusNotaFiscal ==  model.IdStatusNotaFiscal);
 
             return query;
         }

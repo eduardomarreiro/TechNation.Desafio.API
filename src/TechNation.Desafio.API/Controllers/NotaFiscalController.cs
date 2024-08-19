@@ -47,6 +47,14 @@ namespace TechNation.Desafio.API.Controllers
             return Ok(notasFiscais);
         }
 
+        [HttpGet]
+        [Route("GetInfoTableDashboard")]
+        public async Task<ActionResult<List<NotaFiscalDto>>> GetInfoTableDashboard([FromQuery] DashboardNotaFiscalDto dto)
+        {
+            var notasFiscais = await _notaFiscalApplicationService.GetInfoTableDashboard(dto);
+            return Ok(notasFiscais);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<NotaFiscalDto>> GetById(int id)
         {

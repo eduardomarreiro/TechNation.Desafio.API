@@ -33,5 +33,10 @@ namespace TechNation.Desafio.Domain.Services
         {
             return await _notaFiscalRepository.GetReceitaMensal(model);
         }
+
+        public async Task<List<NotaFiscal>> GetInfoTableDashboard(DashboardNotaFiscalFilter model)
+        {
+            return await _notaFiscalRepository.GetInfoTableDashboard(model);
+        }
     }
 }
