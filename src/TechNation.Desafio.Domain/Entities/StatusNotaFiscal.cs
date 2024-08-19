@@ -10,7 +10,8 @@ namespace TechNation.Desafio.Domain.Entities
     public class StatusNotaFiscal : Base
     {
         public string Nome { get; set; }
-        public ICollection<NotaFiscal> NotasFiscais { get; set; }
 
+        // Navigation property
+        public ICollection<NotaFiscal> NotaFiscais { get; set; }
     }
 }

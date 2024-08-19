@@ -22,7 +22,8 @@ namespace TechNation.Desafio.Application.Mappings
                 .ForMember(dest => dest.DataEmissao, opt => opt.MapFrom(src => src.DataEmissao.ToString("yyyy-MM-dd")))
                 .ForMember(dest => dest.DataCobranca, opt => opt.MapFrom(src => src.DataCobranca.Value.ToString("yyyy-MM-dd")))
                 .ForMember(dest => dest.DataPagamento, opt => opt.MapFrom(src => src.DataPagamento.Value.ToString("yyyy-MM-dd")));
-            CreateMap<NotaFiscalDto, NotaFiscal>();
+            CreateMap<NotaFiscalDto, NotaFiscal>()
+            .ForMember(dest => dest.StatusNotaFiscal, opt => opt.Ignore()); // Ignora o StatusNotaFiscal pois é um mapeamento apenas para o nome;
             CreateMap<DashboardNotaFiscalDto, DashboardNotaFiscalFilter>();
             CreateMap<DashboardNotaFiscalFilter, DashboardNotaFiscalDto>();
         }

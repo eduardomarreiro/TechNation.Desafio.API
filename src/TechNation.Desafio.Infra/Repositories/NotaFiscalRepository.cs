@@ -101,7 +101,7 @@ namespace TechNation.Desafio.Infra.Repositories
 
         public async Task<List<NotaFiscal>> GetInfoTableDashboard(DashboardNotaFiscalFilter model)
         {
-            var query = _sqlContext.Set<NotaFiscal>().AsNoTracking().Include(q => q.StatusNotaFiscal).AsQueryable();
+            var query = _sqlContext.Set<NotaFiscal>().AsNoTracking().Include(e => (e as NotaFiscal).StatusNotaFiscal).AsQueryable();
 
             query = ApplyDateFilters(query, model);
             query = ApplyStatusFilters(query, model);

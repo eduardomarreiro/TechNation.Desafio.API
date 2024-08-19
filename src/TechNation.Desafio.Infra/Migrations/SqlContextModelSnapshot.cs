@@ -39,6 +39,9 @@ namespace TechNation.Desafio.Infra.Migrations
                     b.Property<DateTime?>("DataPagamento")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DataVencimento")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("DocumentoBoletoBancario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -61,17 +64,12 @@ namespace TechNation.Desafio.Infra.Migrations
                         .HasColumnType("nvarchar(6)")
                         .HasAnnotation("RegularExpression", "^[0-9]{6}$");
 
-                    b.Property<int?>("StatusNotaFiscalId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdStatusNotaFiscal");
-
-                    b.HasIndex("StatusNotaFiscalId");
 
                     b.ToTable("NotaFiscal");
                 });
@@ -96,22 +94,18 @@ namespace TechNation.Desafio.Infra.Migrations
 
             modelBuilder.Entity("TechNation.Desafio.Domain.Entities.NotaFiscal", b =>
                 {
-                    b.HasOne("TechNation.Desafio.Domain.Entities.StatusNotaFiscal", null)
-                        .WithMany("NotasFiscais")
-                        .HasForeignKey("IdStatusNotaFiscal")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TechNation.Desafio.Domain.Entities.StatusNotaFiscal", "StatusNotaFiscal")
-                        .WithMany()
-                        .HasForeignKey("StatusNotaFiscalId");
+                        .WithMany("NotaFiscais")
+                        .HasForeignKey("IdStatusNotaFiscal")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("StatusNotaFiscal");
                 });
 
             modelBuilder.Entity("TechNation.Desafio.Domain.Entities.StatusNotaFiscal", b =>
                 {
-                    b.Navigation("NotasFiscais");
+                    b.Navigation("NotaFiscais");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,10 +18,6 @@ namespace TechNation.Desafio.Infra.Mappings
             builder.Property(s => s.Nome)
                 .IsRequired()
                 .HasMaxLength(50);
-
-            builder.HasMany(s => s.NotasFiscais)
-                .WithOne()
-                .HasForeignKey(n => n.IdStatusNotaFiscal);
         }
     }
 }

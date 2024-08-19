@@ -40,9 +40,10 @@ namespace TechNation.Desafio.Infra.Mappings
             builder.Property(n => n.DocumentoBoletoBancario)
                 .IsRequired();
 
-            builder.HasOne(n => n.StatusNotaFiscal)
-                .WithMany(s => s.NotasFiscais)
-                .HasForeignKey(n => n.IdStatusNotaFiscal);
+            builder.HasOne(nf => nf.StatusNotaFiscal)
+            .WithMany(sn => sn.NotaFiscais)
+            .HasForeignKey(nf => nf.IdStatusNotaFiscal)
+            .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

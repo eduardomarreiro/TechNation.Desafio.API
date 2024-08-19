@@ -48,12 +48,12 @@ namespace TechNation.Desafio.Application.Services
             return _mapper.Map<ChartResponse>(chartResponse);
         }
 
-        public async Task<List<NotaFiscal>> GetInfoTableDashboard(DashboardNotaFiscalDto dashboardNotaFiscalDto)
+        public async Task<List<NotaFiscalDto>> GetInfoTableDashboard(DashboardNotaFiscalDto dashboardNotaFiscalDto)
         {
             var dashboardNotaFiscalFilter = _mapper.Map<DashboardNotaFiscalFilter>(dashboardNotaFiscalDto);
             var tableResponse = await _notaFiscalRepository.GetInfoTableDashboard(dashboardNotaFiscalFilter);
 
-            return _mapper.Map<List<NotaFiscal>>(tableResponse);
+            return _mapper.Map<List<NotaFiscalDto>>(tableResponse);
         }
 
     }

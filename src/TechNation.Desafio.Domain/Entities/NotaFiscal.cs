@@ -17,7 +17,11 @@ namespace TechNation.Desafio.Domain.Entities
         public decimal Valor { get; set; }
         public string DocumentoNotaFiscal { get; set; }
         public string DocumentoBoletoBancario { get; set; }
+
+        // Foreign key
         public int IdStatusNotaFiscal { get; set; }
+
+        // Navigation property
         public StatusNotaFiscal StatusNotaFiscal { get; set; }
     }
 }
