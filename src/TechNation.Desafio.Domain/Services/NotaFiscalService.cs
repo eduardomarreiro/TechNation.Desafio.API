@@ -5,15 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechNation.Desafio.Domain.Entities;
+using TechNation.Desafio.Domain.Filters;
 using TechNation.Desafio.Domain.Interfaces.Repositories;
 using TechNation.Desafio.Domain.Interfaces.Services;
+using TechNation.Desafio.Domain.Response;
 
 namespace TechNation.Desafio.Domain.Services
 {
     public class NotaFiscalService : ServiceBase<NotaFiscal>, INotaFiscalService
     {
-        public NotaFiscalService(IRepositoryBase<NotaFiscal> rep) : base(rep)
+        protected readonly INotaFiscalRepository _notaFiscalRepository;
+        public NotaFiscalService(INotaFiscalRepository notaFiscalRepository) : base(notaFiscalRepository)
         {
+            _notaFiscalRepository = notaFiscalRepository;
+        }
+        public async Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(CardsNotaFiscalFilter model)
+        {
+            return await _notaFiscalRepository.GetQtdNotasPorCategoria(model);
         }
     }
 }

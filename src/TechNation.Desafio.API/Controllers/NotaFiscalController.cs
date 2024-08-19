@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TechNation.Desafio.Application.DTOs;
 using TechNation.Desafio.Application.Interfaces;
+using TechNation.Desafio.Domain.Response;
 
 namespace TechNation.Desafio.API.Controllers
 {
@@ -20,6 +21,13 @@ namespace TechNation.Desafio.API.Controllers
         public async Task<ActionResult<IEnumerable<NotaFiscalDto>>> GetAll()
         {
             var notasFiscais = await _notaFiscalApplicationService.GetAll();
+            return Ok(notasFiscais);
+        }
+        [HttpGet]
+        [Route("GetQtdNotasPorCategoria")]
+        public async Task<ActionResult<List<CardNotaFiscalResponse>>> GetQtdNotasPorCategoria([FromQuery] CardsNotaFiscalDto dto)
+        {
+            var notasFiscais = await _notaFiscalApplicationService.GetQtdNotasPorCategoria(dto);
             return Ok(notasFiscais);
         }
 

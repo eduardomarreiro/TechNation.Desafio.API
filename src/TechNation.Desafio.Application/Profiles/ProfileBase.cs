@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechNation.Desafio.Application.DTOs;
 using TechNation.Desafio.Domain.Entities;
+using TechNation.Desafio.Domain.Filters;
 
 namespace TechNation.Desafio.Application.Mappings
 {
@@ -22,6 +23,8 @@ namespace TechNation.Desafio.Application.Mappings
                 .ForMember(dest => dest.DataCobranca, opt => opt.MapFrom(src => src.DataCobranca.Value.ToString("yyyy-MM-dd")))
                 .ForMember(dest => dest.DataPagamento, opt => opt.MapFrom(src => src.DataPagamento.Value.ToString("yyyy-MM-dd")));
             CreateMap<NotaFiscalDto, NotaFiscal>();
+            CreateMap<CardsNotaFiscalDto, CardsNotaFiscalFilter>();
+            CreateMap<CardsNotaFiscalFilter, CardsNotaFiscalDto>();
         }
     }
 }

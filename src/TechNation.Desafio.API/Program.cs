@@ -44,7 +44,7 @@ builder.Services.AddScoped<IStatusNotaFiscalService, StatusNotaFiscalService>();
 
 // Repositories
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
-builder.Services.AddScoped<INotaFiscalRepository, NotaFiscalRepository>();
+builder.Services.AddScoped<INotaFiscalRepository, NotaFiscalrepository>();
 builder.Services.AddScoped<IStatusNotaFiscalRepository, StatusNotaFiscalRepository>();
 #endregion
 

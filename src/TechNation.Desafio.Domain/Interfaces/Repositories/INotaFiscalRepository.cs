@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechNation.Desafio.Domain.Entities;
+using TechNation.Desafio.Domain.Filters;
+using TechNation.Desafio.Domain.Response;
 
 namespace TechNation.Desafio.Domain.Interfaces.Repositories
 {
     public interface INotaFiscalRepository : IRepositoryBase<NotaFiscal>
     {
+        Task<List<CardNotaFiscalResponse>> GetQtdNotasPorCategoria(CardsNotaFiscalFilter model);
     }
 }

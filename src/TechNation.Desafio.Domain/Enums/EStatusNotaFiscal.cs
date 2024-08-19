@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechNation.Desafio.Domain.Enums
 {
-    public enum StatusNotaFiscal
+    public enum EStatusNotaFiscal
     {
         Emitida = 1,
         CobrancaRealizada,
