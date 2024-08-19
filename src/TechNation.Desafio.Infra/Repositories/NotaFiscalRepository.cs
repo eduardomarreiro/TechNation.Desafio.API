@@ -57,7 +57,7 @@ namespace TechNation.Desafio.Infra.Repositories
             {
                 Labels = result.GroupBy(nf => new { nf.DataVencimento.Year, nf.DataVencimento.Month })
                                .OrderBy(g => g.Key.Year).ThenBy(g => g.Key.Month)
-                               .Select(g => new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMMM/yyyy"))
+                               .Select(g => new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMM/yy"))
                                .ToList(),
 
                 Data = result.GroupBy(nf => new { nf.DataVencimento.Year, nf.DataVencimento.Month })
@@ -84,7 +84,7 @@ namespace TechNation.Desafio.Infra.Repositories
             {
                 Labels = result.GroupBy(nf => new { nf.DataPagamento?.Year, nf.DataPagamento?.Month })
                                .OrderBy(g => g.Key.Year).ThenBy(g => g.Key.Month)
-                               .Select(g => new DateTime((int)g.Key.Year, (int)g.Key.Month, 1).ToString("MMMM/yyyy"))
+                               .Select(g => new DateTime((int)g.Key.Year, (int)g.Key.Month, 1).ToString("MMM/yy"))
                                .ToList(),
 
                 Data = result.GroupBy(nf => new { nf.DataPagamento?.Year, nf.DataPagamento?.Month })
