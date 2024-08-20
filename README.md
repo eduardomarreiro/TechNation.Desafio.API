@@ -24,16 +24,14 @@ Não é necessário instalar um servidor de banco de dados, pois o Docker cuidar
 
 ### 1. Subir a Aplicação
 
-Execute o seguinte comando para criar e iniciar os containers da aplicação, na pasta que se encontra o arquivo docker-compose.yml :
+Execute a aplicação através do visual studio 2022, selecionando as seguintes opções: 
 
-```bash
-docker-compose up
+![image](https://github.com/user-attachments/assets/21afc9bc-7732-49ce-af30-92ab06eda3e4)
 
-```
 
 ### 2. Banco de Dados
 
-O banco de dados será criado automaticamente. Para facilitar o processo, um script de popular o banco de dados com alguns registros será anexado.
+O banco de dados será criado automaticamente. Para facilitar o processo, um script de popular o banco de dados com alguns registros está anexado, na camada de infra na pasta de Scripts.
 
 ### 3. Criação e edição de uma nota fiscal
 
