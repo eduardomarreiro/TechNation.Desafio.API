@@ -1,20 +1,20 @@
 services:
-  technation-api:
-    container_name: technation-api
-    depends_on:
-      - sqlserver
-    build: ./src
+  technation.desafio.api:
+    image: ${DOCKER_REGISTRY:-technationdesafioapi}
+    build:
+      context: .
+      dockerfile: src/TechNation.Desafio.API/Dockerfile
     ports:
-      - 8080:80
-      - 8081:443
+      - "4237:8080"
     environment:
-      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__TechNationContextConnection: "Server=sqlserver;Database=TechNation.Desafio;User Id=sa;Password=technation@123;TrustServerCertificate=True;"
 
   sqlserver:
     container_name: sqlserver
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
-      - 1434:1433
+      - "1434:1433"
     environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: technation@123
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "technation@123"
