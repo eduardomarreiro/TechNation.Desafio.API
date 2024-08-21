@@ -6,6 +6,7 @@ services:
       dockerfile: src/TechNation.Desafio.API/Dockerfile
     ports:
       - "4237:8080"
+      - "4238:8081"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       ConnectionStrings__TechNationContextConnection: "Server=sqlserver;Database=TechNation.Desafio;User Id=sa;Password=technation@123;TrustServerCertificate=True;"
